@@ -31,7 +31,9 @@ class ViewController: UIViewController {
         let image = UIImage(named: name)
         someimage.setImage(image!, for: .normal)
         play.setTitle("再生", for: UIControlState.normal)
-        play.isExclusiveTouch = false
+        backward.isEnabled = true
+        forward.isEnabled = true
+
     }
 //----------------------遷移
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -44,7 +46,7 @@ class ViewController: UIViewController {
         else {
             self.timer.invalidate()
             self.timer = nil
-            play.setTitle("停止", for: UIControlState.normal)
+            play.setTitle("再生", for: UIControlState.normal)
             backward.isEnabled = true
             forward.isEnabled = true
 
@@ -79,7 +81,6 @@ class ViewController: UIViewController {
             play.setTitle("再生", for: UIControlState.normal)
             backward.isEnabled = true
             forward.isEnabled = true
-            play.isExclusiveTouch = false
             self.timer.invalidate()
             self.timer = nil
         }
