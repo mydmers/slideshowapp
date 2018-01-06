@@ -30,6 +30,8 @@ class ViewController: UIViewController {
         let name = displayimages[displayimageNo]
         let image = UIImage(named: name)
         someimage.setImage(image!, for: .normal)
+        play.setTitle("再生", for: UIControlState.normal)
+        play.isExclusiveTouch = false
     }
 //----------------------遷移
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -37,9 +39,16 @@ class ViewController: UIViewController {
         let resultViewController:ResultViewController = segue.destination as! ResultViewController
         resultViewController.imageName = displayimages[displayimageNo]
         
-        self.timer.invalidate()
-        self.timer = nil
-        play.setTitle("再生", for: UIControlState.normal)
+        if (self.timer == nil) {
+        }
+        else {
+            self.timer.invalidate()
+            self.timer = nil
+            play.setTitle("停止", for: UIControlState.normal)
+            backward.isEnabled = true
+            forward.isEnabled = true
+
+        }
     }
 //------------------------
     override func didReceiveMemoryWarning() {
@@ -47,6 +56,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 //----------------------戻る
+    @IBOutlet weak var backward: UIButton!
     @IBAction func backward(_ sender: Any) {
 
         displayimageNo -= 1
@@ -60,17 +70,23 @@ class ViewController: UIViewController {
 
         if (self.timer == nil) {
             play.setTitle("停止", for: UIControlState.normal)
-            
+            backward.isEnabled = false
+            forward.isEnabled = false
             self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+
         }
         else {
             play.setTitle("再生", for: UIControlState.normal)
+            backward.isEnabled = true
+            forward.isEnabled = true
+            play.isExclusiveTouch = false
             self.timer.invalidate()
             self.timer = nil
         }
 
      }
 //----------------------進む
+    @IBOutlet weak var forward: UIButton!
     @IBAction func forward(_ sender: Any) {
         displayimageNo += 1
         display()

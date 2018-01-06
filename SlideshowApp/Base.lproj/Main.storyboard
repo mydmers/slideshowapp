@@ -81,6 +81,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backward" destination="PGO-WH-jxk" id="ZXx-Ym-OEJ"/>
+                        <outlet property="forward" destination="gHF-73-IQm" id="kTr-7f-9xC"/>
                         <outlet property="play" destination="7jH-FB-WCi" id="WQB-QL-hjn"/>
                         <outlet property="someimage" destination="NWS-ir-b7N" id="RlA-m6-9vG"/>
                     </connections>
